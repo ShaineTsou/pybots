@@ -1,11 +1,13 @@
-# Usage: 'python3 thumbnail-creator.py [folder/] [new_folder/]'
+# Usage: 'python3 thumbnail-creator.py [folder/] [new_folder/] [min_height_px]'
 import os
 import sys
 from PIL import Image
 
-# Grab second and third command line arguments
+# Grab command line arguments
 image_folder = sys.argv[1]
 new_folder = sys.argv[2]
+min_height = int(sys.argv[3])
+
 
 # If the new_folder doesn't exist, create one
 if not os.path.isdir(new_folder):
@@ -16,7 +18,7 @@ if not os.path.isdir(new_folder):
 for filename in os.listdir(image_folder):
     root, ext = os.path.splitext(filename)
 
-    if ext == '.png':
+    if ext == '.png' or '.jpg':
         try:
             with Image.open(f'{image_folder}{filename}') as img:
                 print(f'Original size of {filename}: {img.size}')
@@ -26,7 +28,8 @@ for filename in os.listdir(image_folder):
 
                 # Make the thumnail based on fixed height value
                 quotient_of_w_and_h = img.size[0] / img.size[1]
-                thumbnail_img.thumbnail((quotient_of_w_and_h * 700, 700))
+                thumbnail_img.thumbnail(
+                    (quotient_of_w_and_h * min_height, min_height))
 
                 # Save the file to the new folder
                 thumbnail_img.save(f'{new_folder}thumbnail-{root}.png', 'png')
