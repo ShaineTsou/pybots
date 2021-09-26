@@ -1,3 +1,5 @@
+# -----  With great power, comes great responsibility. Be ethical.  -----
+
 # Build another Hacker News (https://news.ycombinator.com/news) using web scraping
 # Show stories that has over 100 points of votes from highest to lowest in the terminal
 # Usage: 'python3 scrape-hn.py [pages_you_want_to_read]'
